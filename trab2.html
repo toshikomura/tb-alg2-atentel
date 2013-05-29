@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+
+<meta name="generator" content="http://txt2tags.sf.net">
+<title>Segundo Trabalho Prático</title>
+</head><body bgcolor="white" text="black">
+<p align="center"></p><center><h1>Segundo Trabalho Prático</h1>
+<font size="4">
+<i>CI056 - 2010/2</i><br>
+</font></center>
+
+<h1>Controle de atendimento telefônico</h1>
+<p>
+Uma pequena empresa tem seu serviço de atendimento ao cliente feito 
+através de uma unidade de resposta audível (URA) e uma única 
+telefonista.
+A URA serve para os clientes digitarem seu tipo de atendimento. A URA 
+também pode ser utilizada para controlar a prioridade das ligações e a 
+fila de espera.
+Como o numero de clientes tem crescido muito é preciso ajudar a URA a 
+controlar esta prioridade.
+</p>
+<p>
+As regras são as seguintes: 
+</p>
+<ul>
+<li>uma única telefonista;
+</li><li>o tempo é contado em minutos (implementado por ciclos);
+</li><li>as ligações possuem diferentes tipos (reclamação, compra, 
+informações) e tem um tempo de atendimento de: 5, 7 e 2 respectivamente;
+</li><li>a URA inicia vazia;
+</li><li>a fila de espera não deve crescer muito;
+</li><li>as ligações não podem ser perdidas (para isso deve-se pensar na priorização de ligação);
+</li><li>cada ligacao pode esperar no máximo 4 minutos. Ligações que 
+ultrapassem este tempo  devem ser  tratadas com urgencia (prioridade 
+máxima);
+</li></ul>
+
+<h2>Entrada:</h2>
+<p>
+A entrada deve  ser feita pela entrada padrão  (<code>stdin</code>).  
+O arquivo é formado por uma sequência de linhas, onde cada linha 
+representa um ligação chegando. Cada linha tem 3 campos: o primeiro é o 
+tempo em que a ligação chega (em minutos), o segundo é o tipo (uma 
+string de no máximo 3 caracteres), e o terceiro é o identificador do 
+ligação (uma string de no máximo 3 caracteres). Estas linhas estão 
+ordenadas pelo primeiro campo (tempos menores no início).
+</p>
+<p>
+Exemplo:
+</p>
+<pre>  2 REC A
+  5 REC B
+  10 COM C
+  11 INF D
+  13 REC E
+  17 INF F
+  24 REC G
+</pre>
+<p></p>
+<h2>Saída:</h2>
+<p>
+A saída deve  ser feita pela saída padrão  (<code>stdout</code>).  
+O arquivo será composto por uma sequência de linhas. Uma linha para cada
+ evento (ura, atendido ou urgencia).
+O evento 'ura' significa que o telefonema foi recebido pela Ura. O 
+evento 'atendido' significa que o telefonema foi recebido pela 
+telefonista. O evento 'urgencia' significa que o telefonema foi tratado 
+pela telefonista assim que possivel.
+Cada linha tem 3 campos separados por espaço (um único espaço entre cada
+ par de campos). O primeiro campo é o tipo do evento. O segundo campo é o
+ tempo final de atendimento (em minutos). E o terceiro é o identificador
+ da ligação.
+</p>
+<p>
+Por exemplo um conteúdo do arquivo de saída válido
+seria:
+</p>
+<pre>  ura 2 A
+  ura 5 B
+  atendido 7 A
+  ura 10 C
+  ura 11 D
+  atendido 12 B
+  ura 13 E
+  atendido 14 D
+  ura 17 F
+  atendido 21 C
+  ura 24 G
+  urgencia 26 E
+  urgencia 28 F
+  atendido 32 G
+</pre>
+Para calcular o tempo final de atendimento, considere o tempo de entrada
+  + tempo de ligação (segundo o tipo) + espera (se tiver).
+<p>Exemplo 1: "2 REC A", seria 2+5 , entao "atendido 7 A".</p>
+<p>Exemplo 2: "5 REC B", seria 5+5+2 , entao "atendido 12 B".</p>
+ <p></p>
+<h2>Requisitos mínimos:</h2>
+<p>
+O trabalho deve  ser feito de forma que possa  ser compilado e executado
+nas servidoras de computação do Departamento de Informática.
+</p>
+<p>
+O nome do executável deve ser <code>ura</code>.
+</p>
+<p>
+Não devem ter nenhuma opção de linha comando.
+</p>
+<h2>O que deve ser entregue:</h2>
+<p>
+Além dos arquivos fonte, deve  acompanhar um <code>makefile</code> e um relatório
+com no máximo 2 páginas contendo  os nomes dos alunos, uma descrição das
+estruturas  de  dados e  das  soluções  encontradas  e uma  documentação
+sintetizada  do  sistema  implementado.  Qualquer  particularidade  deve
+estar descrita neste texto.
+</p>
+<p>
+Para compilar será usado o comando <code>make</code> (sem nenhum parâmetro).
+</p>
+<p>
+Para testar será executado um script como o abaixo.
+</p>
+<pre>     ura &lt; teste.in &gt; teste.out
+     diff teste.sol teste.out
+</pre>
+<p></p>
+<p>
+Onde <code>teste.in</code>  é o arquivo de  entrada do teste e  <code>teste.sol</code> é o
+esperado como saída.
+</p>
+<p>
+Caso o  teste seja positivo (não  imprime nada) será  analisado o código
+fonte.
+</p>
+<h2>Forma de entrega:</h2>
+<p>
+O trabalho deve ser  empacotado em um arquivo login1-login2.tar.gz, onde
+login1-login2 é uma  string com os logins dos  integrantes da equipe nas
+servidoras do DInf.   Ao descompactar este arquivo deverá  ser criado um
+diretório de nome login1-login2 que  conterá todos os demais arquivos. O
+<code>make</code> e o script acima  deverão funcionar dentro deste diretório (não
+em subdiretórios).
+</p>
+<p>
+Este arquivo deve ser enviado por e-mail ao endereço do professor com o assunto "CI056-trab2" (exatamente).
+</p>
+<h2>Equipe:</h2>
+<p>
+O trabalho DEVE ser feito em equipes de 2 (dois) ou 3 (três) alunos.
+</p>
+
+<!-- html code generated by txt2tags 2.5 (http://txt2tags.sf.net) -->
+<!-- cmdline: txt2tags -t html -o trab2.html trab2.t2t -->
+</body></html>
